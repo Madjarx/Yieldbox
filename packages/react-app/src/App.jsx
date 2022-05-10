@@ -12,6 +12,7 @@ import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
+import 'antd-button-color/dist/css/style.css'; // or 'antd-button-color/dist/css/style.less'
 import {
   Account,
   Contract,
@@ -267,6 +268,7 @@ function App(props) {
       <Main 
         // props from App.jsx
         web3Modal={web3Modal}
+        
       />
 
       {/* 👨‍💼 Your account is in the top right with a wallet at connect options */}

@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { PendingTimeline } from "./PendingTimeline";
+import DefaultTimeline from "./PendingTimeline";
 import styles from "./styles";
-import { DownloadOutlined } from "@ant-design/icons";
-import { Card, Progress, Dropdown, Empty, Menu, Modal, Divider, Button } from "antd";
-import Table from './Table';
+import { DownloadOutlined, ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
+import { Tooltip, Card, Progress, Dropdown, Empty, Menu, Modal, Divider, Space, Statistic } from "antd";
+// import { Tooltip, Card, Progress, Dropdown, Empty, Menu, Modal, Divider, Button, Space, Statistic } from "antd";
+import Table from "./Table";
+import EventHistory from "./EventHistory2";
+import Button from "antd-button-color";
 
 export default function Main(web3Modal) {
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+
+  const calculateYearAmount = () => (9.3)
+
+  const calculateLifetimeMajor = () => (9.3)
+  const calculateLifetimeMinor = () => (9.3)
+  const calculateLifetime = () => ({max: calculateLifetimeMajor() + calculateLifetimeMinor(), min: calculateLifetimeMinor()})
+
 
   function handleMenuClick(e) {
     console.log("click", e);
@@ -30,39 +43,186 @@ export default function Main(web3Modal) {
     //
   };
 
-  const withdrawDropdown = (
-    <Menu onClick={handleMenuClick}>
-      <Menu.Item key="1" onClick={showModal}>
-        Withdraw
-      </Menu.Item>
-    </Menu>
-  );
+  // function withdrawDropdown() {
+  //   return (
+  //     <Menu onClick={handleMenuClick}>
+  //       <Menu.Item key="1" onClick={showModal}>
+  //         Reinvest
+  //       </Menu.Item>
+  //       <Menu.Item key="2" onClick={showModal}>
+  //         Withdraw
+  //       </Menu.Item>
+  //     </Menu>
+  //   )
+  // };
 
-  return (
-    <div style={styles.container}>
-      <Card title="Title of the card" style={styles.card} bodyStyle={styles.card_body}>
-        <Divider orientation="left">Your Earnings</Divider>
-        <Progress type="circle" percent={15} />
-        <Button type="primary" onClick={handleBuyClick} style={styles.button}>BUY</Button> 
+  function ButtonGroup() {
+    return (
+      <Space direction="horizontal" size={"large"} className="space-align-block">
+        {/* <Space direction="horizontal" align="start" size={`large`} style={{ marginBottom: "20px" }}> */}
+        {/* <Space orientation={"horizontal"}> */}
+        {/* <div className="space-align-block"> */}
+          {/* <Space align="end"> */}
+            {/* <div className="mock-block"> */}
+              {/* <Button
+                type="success"
+                // type="primary"
+                className="mock-block"
+                // block={true}
+                size={"large"}
+                overlayClassName={"success"}
+                // style={styles.button}
+                trigger={"click"}
+                // overlay={withdrawDropdown}
+                onClick={() => handleReinvestClick()}
+                // style={styles.button}
+                // style={{backgroundColor:'#757575'}}
+              >
+                <DownloadOutlined />
+                Deposit
+              </Button> */}
+            {/* </div> */}
+            {/* <span className="mock-block">Block</span> */}
+          {/* </Space> */}
+        {/* </div> */}
+        <Space direction="horizontal" size={300}>
+          <Button
+            type="success"
+            // type="primary"
+            block={true}
+            size={"large"}
+            overlayClassName={"success"}
+            // style={styles.button}
+            trigger={"click"}
+            // overlay={withdrawDropdown}
+            onClick={() => handleReinvestClick()}
+            // style={styles.button}
+            // style={{backgroundColor:'#757575'}}
+          >
+            <DownloadOutlined />
+            Deposit
+          </Button>
+        </Space>
+
         <Dropdown.Button
           type="primary"
           size={"large"}
-          style={styles.button}
+          // style={styles.button}
           trigger={"click"}
-          overlay={withdrawDropdown}
+          // overlay={withdrawDropdown}
           onClick={() => handleReinvestClick()}
         >
           <DownloadOutlined />
-          REHARVEST
+          Invite
         </Dropdown.Button>
+        {/* </Space> */}
+      </Space>
+    );
+  }
 
-        <Divider orientation="left">Recent Earnings</Divider>
-        <Table />     
-      </Card>
+  return (
+    <>
+      <div style={styles.container}>
+        <Card title="Your Box" style={styles.card} bodyStyle={styles.card_body} actions={[<ButtonGroup />]}>
+          <Space direction="horizontal">
+            <Space direction="vertical">
+              <Divider orientation="left">Lifetime</Divider>
+              <Tooltip title={`Deposited: ${50} \ Harvested: ${15}`}>
+                <Progress
+                  type="circle"
+                  percent={30}
+                  success={{ percent: 10 }}
+                  // format={() => `${<ArrowDownOutlined />}`}
+                  // format={() => `${<ArrowDownOutlined />}`}
+                />
+              </Tooltip>
+            </Space>
+            <Space direction="vertical">
+              <Divider orientation="left">Your Grapes</Divider>
+              <Tooltip title={`Balance: ${50 - 15} & Harvestable: ${15}`}>
+                {/* <Tooltip title={`Harvestable from You: ${50} & Harvestable from Referrals: ${15}`}> */}
+                {/* <Tooltip title={`Current Balance: ${50} Harvestable: ${15}`}> */}
+                {/* <Tooltip title={`Deposit: ${50}/ Rewards of deposit: ${15}`}> */}
+                <Progress type="circle" percent={50} success={{ percent: 45 }} />
+              </Tooltip>
+            </Space>
 
-      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleWithdrawClick} onCancel={handleCancel}>
-        <p>Are you sure you want to stop making profit?</p>
-      </Modal>
-    </div>
+            <Space direction="vertical">
+              <Divider orientation="left">From Referrals</Divider>
+              <Tooltip title={`Lifetime: ${25 - 15} & Harvestable: ${15}`}>
+                {/* <Tooltip title={`Deposits: ${50}/ Payouts: ${15}`}> */}
+                <Progress type="circle" percent={25} success={{ percent: 20 }} />
+              </Tooltip>
+            </Space>
+          </Space>
+
+          <Divider orientation="middle">Balances</Divider>
+          <Space direction="horizontal">
+            <Statistic
+              title="Year"
+              value={9.3}
+              precision={2}
+              valueStyle={{ color: "#cf1322" }}
+              prefix={<ArrowDownOutlined />}
+              suffix="%"
+            />
+            <Divider type="vertical" />
+            <Statistic
+              title="Month"
+              value={9.3}
+              precision={2}
+              valueStyle={{ color: "#cf1322" }}
+              prefix={<ArrowDownOutlined />}
+              suffix="%"
+            />
+            <Divider type="vertical" />
+            <Statistic
+              title="Week"
+              value={9.3}
+              precision={2}
+              valueStyle={{ color: "#cf1322" }}
+              prefix={<ArrowDownOutlined />}
+              suffix="%"
+            />
+            <Divider type="vertical" />
+            <Statistic
+              title="Today"
+              value={11.28}
+              precision={2}
+              valueStyle={{ color: "#3f8600" }}
+              prefix={<ArrowUpOutlined />}
+              suffix="%"
+            />
+          </Space>
+          {/* <Button type="primary" onClick={handleBuyClick} style={styles.button}>
+            DEPOSIT
+          </Button> */}
+        </Card>
+
+        {/* <div style={styles.container}>
+          <ButtonGroup />
+        </div> */}
+
+        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleWithdrawClick} onCancel={handleCancel}>
+          <p>Are you sure you want to stop making profit?</p>
+        </Modal>
+      </div>
+
+      {/* <div style={styles.container}>
+        <PendingTimeline />
+        </div> */}
+      {/* <div style={styles.container}> */}
+      {/* </div> */}
+
+      <div style={styles.container}>
+        <Card title="What everyone's doing" style={styles.card}>
+          <Table />
+        </Card>
+      </div>
+
+      {/* <div style={styles.container}>
+        <DefaultTimeline />
+      </div> */}
+    </>
   );
 }

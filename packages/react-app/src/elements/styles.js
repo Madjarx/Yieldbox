@@ -20,7 +20,9 @@ const styles = {
         justifyContent: 'center',
     },
     button: {
-        marginTop:'20px',
+        // backgroundColor: '#700575 !important',
+        color: '#700575',
+        // marginTop:'20px',
         boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
     },
 }
