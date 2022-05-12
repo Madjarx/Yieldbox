@@ -4777,6 +4777,11 @@ ansi-wrap@0.1.0, ansi-wrap@^0.1.0:
   resolved "https://registry.yarnpkg.com/ansi-wrap/-/ansi-wrap-0.1.0.tgz#a82250ddb0015e9a27ca82e82ea603bbfa45efaf"
   integrity sha1-qCJQ3bABXponyoLoLqYDu/pF768=
 
+antd-button-color@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/antd-button-color/-/antd-button-color-1.0.4.tgz#1746bf5b14ef1692929cb0332d076f7fd7b3faf6"
+  integrity sha512-KDzsvs0myFF5HLg8Kj4UW1icuw/vffXW0wwBOUWqVITrLXnrzkRpnOh6DEDmvsjxC8pwM4OCciouqfUlt5+7NA==
+
 antd@4.16.0:
   version "4.16.0"
   resolved "https://registry.yarnpkg.com/antd/-/antd-4.16.0.tgz#35b03f42a0710edd2153f3fd33f8f93298b12bc7"
@@ -6376,7 +6381,7 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@^3.5.0, bluebird@^3.5.2, bluebird@^3.5.5:
+bluebird@^3.5.0, bluebird@^3.5.2, bluebird@^3.5.5, bluebird@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
   integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
@@ -11435,9 +11440,9 @@ glogg@^1.0.0:
   dependencies:
     sparkles "^1.0.0"
 
-"gluegun@git+https://github.com/edgeandnode/gluegun.git#v4.3.1-pin-colors-dep":
+"gluegun@https://github.com/edgeandnode/gluegun#v4.3.1-pin-colors-dep":
   version "4.3.1"
-  resolved "git+https://github.com/edgeandnode/gluegun.git#b34b9003d7bf556836da41b57ef36eb21570620a"
+  resolved "https://github.com/edgeandnode/gluegun#b34b9003d7bf556836da41b57ef36eb21570620a"
   dependencies:
     apisauce "^1.0.1"
     app-module-path "^2.2.0"

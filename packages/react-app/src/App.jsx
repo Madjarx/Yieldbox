@@ -12,7 +12,7 @@ import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
-import 'antd-button-color/dist/css/style.css'; // or 'antd-button-color/dist/css/style.less'
+import "antd-button-color/dist/css/style.css"; // or 'antd-button-color/dist/css/style.less'
 import {
   Account,
   Contract,
@@ -32,8 +32,9 @@ import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
 import { Home, ExampleUI, Hints, Subgraph } from "./views";
 import { useStaticJsonRPC } from "./hooks";
-// Our component imports 
-import { Main } from './elements';
+// Our component imports
+import { Main } from "./elements";
+import GrapeBoxConnector from "./lib/GrapeBoxConnector";
 
 const { ethers } = require("ethers");
 /*
@@ -247,10 +248,26 @@ function App(props) {
 
   const faucetAvailable = localProvider && localProvider.connection && targetNetwork.name.indexOf("local") !== -1;
 
+  //#region Grapes
+  const grapeFactory = () =>
+    new GrapeBoxConnector({
+      contractReader: readContracts,
+      contractWriter: writeContracts,
+    });
+
+  const [grapes, setGrapes] = useState(grapeFactory());
+  useEffect(() => setGrapes(grapeFactory()), [readContracts, writeContracts]);
+  //#endregion
+
+  // const grapes2 = new GrapeBoxConnector({
+  //   contractReader: readContracts,
+  //   contractWriter: writeContracts,
+  // });
+
   return (
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
-      
+
       {/* <NetworkDisplay
         NETWORKCHECK={NETWORKCHECK}
         localChainId={localChainId}
@@ -259,16 +276,20 @@ function App(props) {
         logoutOfWeb3Modal={logoutOfWeb3Modal}
         USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
       /> */}
-      
-
-      
 
       <Header />
       <ThemeSwitch />
-      <Main 
+
+      <Main
         // props from App.jsx
         web3Modal={web3Modal}
-        
+        price={price}
+        grapes={grapes}
+        contractReader={readContracts}
+        contractWriter={writeContracts}
+        userSigner={userSigner}
+        localProvider={localProvider}
+        mainnetProvider={mainnetProvider}
       />
 
       {/* 👨‍💼 Your account is in the top right with a wallet at connect options */}
