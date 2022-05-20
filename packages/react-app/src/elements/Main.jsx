@@ -61,7 +61,7 @@ function Main({ web3Modal, grapes, contractReader }) {
   //#region MICHAEL
 
   // benefit: we can "hide" that we're using either local mock classes vs remote contracts.
-  const lifetimeMinor = intercept(null, await grapes.ReadContractValue("lifetimeMinor")); // -------------------> ideal, go with this approach
+  // const lifetimeMinor = intercept(null, await grapes.ReadContractValue("lifetimeMinor")); // -------------------> ideal, go with this approach
   // const lifetimeMinor2 = await grapes.ReadContractValue("lifetimeMinor");
   // const lifetimeMinor3 = await grapes["lifetimeMinor"](); // <-- this is what it does under the hood
 
